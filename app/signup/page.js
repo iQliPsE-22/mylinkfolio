@@ -24,7 +24,7 @@ const page = () => {
   const [submit_btn, setSubmit_btn] = useState(false);
   return (
     <div className="min-h-dvh flex flex-col items-center justify-center rounded p-8 ">
-      <StepsRoot defaultStep={1} count={6} className="w-full lg:w-[60%]">
+      <StepsRoot defaultStep={0} count={6} className="w-full lg:w-[60%]">
         <StepsList>
           <StepsItem index={0} title="Personal info" />
           <StepsItem index={1} title="Education" />

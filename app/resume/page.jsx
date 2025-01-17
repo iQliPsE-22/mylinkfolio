@@ -5,7 +5,6 @@ import { UserProvider } from "../userContext";
 import Link from "next/link";
 import { HStack } from "@chakra-ui/react";
 import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
 import { Provider } from "./../../components/ui/provider";
 import { Button } from "./../../components/ui/button";
 const Page = () => {
@@ -14,160 +13,198 @@ const Page = () => {
   const experience = user?.experience || [];
   const education = user?.education || [];
   const certificates = user?.certificates || [];
+  const skills = user?.skills || [];
   const projects = user?.project || [];
+  const downloadPDF = () => {
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+    });
 
-  const downloadPDF = async () => {
-    const section = document.querySelector(".pdf-content"); // Target the div
-    if (!section) return;
+    const content = document.querySelector(".pdf-content");
 
-    const canvas = await html2canvas(section, { scale: 2 }); // Higher scale for better quality
-    const imgData = canvas.toDataURL("image/png");
-
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = 210; // A4 width in mm
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Maintain aspect ratio
-
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save(`${user?.firstName || "Resume"}.pdf`); // Download as PDF
+    pdf.html(content, {
+      callback: (doc) => {
+        doc.save(`${user?.firstName || "resume"}.pdf`);
+      },
+      x: 1,
+      y: 0,
+      html2canvas: { scale: 0.16 }, // Adjust scale if needed
+    });
+  };
+  const styles = {
+    page: {
+      padding: "20mm",
+      margin: "0 auto",
+      backgroundColor: "white",
+      boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+      fontFamily: "Arial, sans-serif",
+      fontSize: "14pt",
+      lineHeight: "1.4",
+      color: "#333",
+    },
+    header: {
+      textAlign: "center",
+      marginBottom: "3mm",
+    },
+    h1: {
+      fontSize: "20pt",
+      fontWeight: "bold",
+      margin: "0 0 2mm 0",
+    },
+    h2: {
+      fontSize: "18pt",
+      fontWeight: "bold",
+      borderBottom: "1px solid #333",
+      marginBottom: "2mm",
+      paddingBottom: "2mm",
+    },
+    h3: {
+      fontSize: "16pt",
+      fontWeight: "bold",
+      margin: "0 0 1mm 0",
+    },
+    section: {
+      marginBottom: "5mm",
+    },
+    ul: {
+      fontSize: "16pt",
+      marginTop: "2mm",
+      marginBottom: "2mm",
+      paddingLeft: "5mm",
+      listStyleType: "disc",
+    },
+    li: {
+      marginBottom: "1mm",
+    },
+    link: {
+      color: "#1154cc",
+      textDecoration: "none",
+    },
+    experienceItem: {
+      marginBottom: "3mm",
+    },
+    projectItem: {
+      marginBottom: "3mm",
+    },
+    educationItem: {
+      marginBottom: "2mm",
+    },
+    skillCategory: {
+      fontWeight: "bold",
+    },
   };
 
   return (
     <UserProvider>
       <Provider>
-        <section className="w-full flex justify-center p-8 text-xs">
-          <div
-            className="pdf-content bg-white text-black pl-10 p-8 font-arial"
-            style={{ width: "210mm", minHeight: "297mm" }}
-          >
-            <Head>
-              <title>{`${user?.firstName?.toUpperCase() || ""} ${
-                user?.lastName?.toUpperCase() || ""
-              } Resume`}</title>
-            </Head>
-
-            <header className="pb-4 text-center">
-              <h1 className="text-xl font-bold">
-                {`${user?.firstName?.toUpperCase() || ""} ${
-                  user?.lastName?.toUpperCase() || ""
-                }`}
-              </h1>
-              <p className="">
-                {user?.email || "N/A"} | {user?.phone || "N/A"} |{" "}
-                {user?.linkedin && (
-                  <Link href={user.linkedin} className="text-blue-500">
-                    LinkedIn
-                  </Link>
-                )}{" "}
-                |{" "}
-                {user?.github && (
-                  <Link href={user.github} className="text-blue-500">
-                    Gitub
-                  </Link>
-                )}
+        <section className="w-full flex justify-center p-8 text-sm ">
+          <div style={styles.page} className="pdf-content">
+            <header style={styles.header}>
+              <h1
+                style={styles.h1}
+              >{`${user?.firstName.toUpperCase()} ${user?.lastName.toUpperCase()}`}</h1>
+              <p>
+                {user?.email} | {user?.phone} |{" "}
+                <span style={styles.link}>{user?.linkedin}</span> |{" "}
+                <span style={styles.link}>{user?.github}</span>
               </p>
             </header>
 
-            {experience.length > 0 && (
-              <section className="mb-2">
-                <h2 className=" font-bold border-b-2 mb-2 text-sm">
-                  EXPERIENCE
-                </h2>
-                {experience.map((exp, index) => (
-                  <div key={index} className="mb-2">
-                    <h3 className="font-semibold">
-                      {`${exp.role || ""} | ${exp.organization || " "}`} |
-                      {` ${exp.location || "N/A"} | ${exp.start || "N/A"} - ${
-                        exp.end
-                      }`}
-                    </h3>
-                    <ul className="list-disc pl-6 text-justify">
-                      <li>{exp.point1}</li>
-                      <li>{exp.point2}</li>
-                      <li>{exp.point3}</li>
-                    </ul>
-                  </div>
-                ))}
-              </section>
-            )}
+            <section style={styles.section}>
+              <h2 style={styles.h2}>EXPERIENCE</h2>
+              {experience.map((exp, index) => (
+                <div key={index} style={styles.experienceItem}>
+                  <h3 style={styles.h3}>
+                    {`${exp.role} | ${exp.organization} | ${exp.location} | ${exp.start} – ${exp.end}`}
+                  </h3>
+                  <ul style={styles.ul}>
+                    <li style={styles.li}>{exp.point1}</li>
+                    <li style={styles.li}>{exp.point2}</li>
+                    <li style={styles.li}>{exp.point3}</li>
+                  </ul>
+                </div>
+              ))}
+            </section>
 
-            <section className="mb-2">
-              <h2 className=" font-bold border-b-2 mb-2 text-sm">
-                TECHNICAL SKILLS
-              </h2>
-
-              {user.skills.map((skill, index) => (
+            <section style={styles.section}>
+              <h2 style={styles.h2}>TECHNICAL SKILLS</h2>
+              {skills.map((skill, index) => (
                 <p key={index}>
-                  <strong>{skill.category}:</strong> {skill.name || "N/A"}
+                  <span style={styles.skillCategory}>{skill.category}:</span>{" "}
+                  {skill.name}
                 </p>
               ))}
             </section>
 
-            {projects.length > 0 && (
-              <section className="mb-2">
-                <h2 className="font-bold border-b-2 mb-2 text-sm">PROJECTS</h2>
-                {projects.map((project, index) => (
-                  <div key={index} className="mb-4">
-                    <h3 className="font-semibold text-blue-500">
-                      {project.name || " "}{" "}
-                      <span className="italic text-black">
-                        {" "}
-                        ({project.description || " "} )
-                      </span>
-                    </h3>
-                    <ul className="list-disc pl-6 text-justify">
-                      <li>{project.point1}</li>
-                      <li>{project.point2}</li>
-                      {project.point3 && <li>{project.point3}</li>}
-                    </ul>
-                  </div>
-                ))}
-              </section>
-            )}
+            <section style={styles.section}>
+              <h2 style={styles.h2}>PROJECTS</h2>
+              {projects.map((project, index) => (
+                <div key={index} style={styles.projectItem}>
+                  <h3 style={styles.h3}>
+                    <a href={project.link} style={styles.link}>
+                      {project.name}
+                    </a>
+                    <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
+                      {" "}
+                      ({project.description})
+                    </span>
+                  </h3>
+                  <ul style={styles.ul}>
+                    <li style={styles.li}>{project.point1}</li>
+                    <li style={styles.li}>{project.point2}</li>
+                    {project.point3 && (
+                      <li style={styles.li}>{project.point3}</li>
+                    )}
+                  </ul>
+                </div>
+              ))}
+            </section>
 
-            {education.length > 0 && (
-              <section className="mb-2">
-                <h2 className=" font-bold border-b-2 mb-2 text-sm">
-                  EDUCATION
-                </h2>
-                {education.map((edu, index) => (
-                  <div key={index}>
-                    <div className="flex flex-row justify-between">
-                      <strong>{edu.school}</strong>
-                      <p>{edu.location}</p>
-                    </div>
-                    <div className="flex flex-row justify-between">
-                      <p>
-                        {edu.degree} (
-                        {edu.grade.includes("%")
-                          ? `Percentage: ${edu.grade}`
-                          : `GPA: ${edu.grade}`}
-                        )
-                      </p>
+            <section style={styles.section}>
+              <h2 style={styles.h2}>EDUCATION</h2>
+              {education.map((edu, index) => (
+                <div key={index} style={styles.educationItem}>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <strong>{edu.school}</strong>
+                    <span>{edu.location}</span>
+                  </div>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <span>
+                      {edu.degree} (
+                      {edu.grade.includes("%")
+                        ? `Percentage: ${edu.grade}`
+                        : `GPA: ${edu.grade}`}
+                      )
+                    </span>
+                    <span>
                       ({edu.start}-{edu.end})
-                    </div>
+                    </span>
                   </div>
-                ))}
-              </section>
-            )}
+                </div>
+              ))}
+            </section>
 
-            {certificates.length > 0 && (
-              <section>
-                <h2 className=" font-bold border-b-2 mb-2 text-sm">
-                  CERTIFICATIONS
-                </h2>
-                <ul className="list-disc pl-6 text-justify	">
-                  {certificates.map((cert, index) => (
-                    <li key={index}>
-                      <strong>
-                        {cert.org} [{cert.name}]:
-                      </strong>{" "}
-                      {cert.description}
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
+            <section style={styles.section}>
+              <h2 style={styles.h2}>CERTIFICATIONS</h2>
+              <ul style={styles.ul}>
+                {certificates.map((cert, index) => (
+                  <li key={index} style={styles.li}>
+                    <strong>
+                      {cert.org} [{cert.name}]:
+                    </strong>{" "}
+                    {cert.description}
+                  </li>
+                ))}
+              </ul>
+            </section>
           </div>
+
           <Button onClick={downloadPDF} colorPaletter={"red"}>
             Download
           </Button>
