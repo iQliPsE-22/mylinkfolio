@@ -103,8 +103,8 @@ const Page = () => {
   return (
     <UserProvider>
       <Provider>
-        <section className="w-full flex flex-col justify-center p-8 text-sm h-[210mm] w-[297mm]">
-          <div style={styles.page} className="pdf-content block">
+        <section className="w-full flex flex-col justify-center p-8 text-sm">
+          <div style={styles.page} className="pdf-content">
             <header style={styles.header}>
               <h1
                 style={styles.h1}
