@@ -104,7 +104,7 @@ const Page = () => {
     <UserProvider>
       <Provider>
         <section className="w-full flex flex-col justify-center p-8 text-sm ">
-          <div style={styles.page} className="pdf-content hidden lg:block">
+          <div style={styles.page} className="pdf-content block">
             <header style={styles.header}>
               <h1
                 style={styles.h1}

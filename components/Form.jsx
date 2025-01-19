@@ -29,7 +29,6 @@ const Personal = ({ submit_btn }) => {
       <Text fontSize="sm" color="fg.muted">
         Before Proceeding, We need some Info!
       </Text>
-      
       <Field label="First Name" required>
         <Input
           placeholder="Enter your First Name"

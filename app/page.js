@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { Box, Field, Input, defineStyle, Heading } from "@chakra-ui/react";
 import { Button } from "./../components/ui/button";
+import { useRouter } from "next/navigation";
+import Custom from "./../components/Custom";
 
 const floatingStyles = defineStyle({
   pos: "absolute",
@@ -26,9 +28,39 @@ const floatingStyles = defineStyle({
   },
 });
 
+const handleformSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  try {
+    const response = await fetch(
+      "http://localhost:5000/api/linkedin/get-data",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: link }),
+      }
+    );
+    const data = await response.json();
+    setLoading(false);
+    setLinkedinData(data);
+    console.log(data);
+    if (linkedinData) {
+      router.push("/portfolio");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(link);
+};
+
 export default function Home() {
+  const router = useRouter();
+  const { linkedinData, setLinkedinData } = useState();
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
+
   return (
     <div className="flex flex-col items-center min-h-dvh pb-8">
       <h1 className="quicksand text-lg wider lg:text-3xl font-bold text-[#f0f0f0] text-center mt-8 tracking-wider">
@@ -44,7 +76,10 @@ export default function Home() {
               Fetch Your Details From{" "}
               <span className="text-[#405dbb]">LINKEDIN</span>
             </Heading>
-            <form className="w-full p-2 flex justify-center lg:flex-row flex-col items-center gap-4">
+            <form
+              className="w-full p-2 flex justify-center lg:flex-row flex-col items-center gap-4"
+              onSubmit={handleformSubmit}
+            >
               <Field.Root>
                 <Box pos="relative" w="full">
                   <Input
@@ -71,16 +106,7 @@ export default function Home() {
           </section>
         </div>
 
-        <div className="bg-[#8EACCD] p-8 lg:p-12 w-11/12 lg:w-1/2 rounded-lg mt-8 flex flex-col items-center justify-center shadow shadow-xl">
-          <section className="w-full flex flex-col items-center justify-center pb-8">
-            <Heading className="text-lg lg:text-xl p-4 tracking-wide">
-              Transform your <span className="text-[#405dbb]">RESUME</span>
-            </Heading>
-            <Link href="signup">
-              <Button size="xl" className = "w-full">Let's GO</Button>
-            </Link>
-          </section>
-        </div>
+        <Custom />
       </main>
     </div>
   );
