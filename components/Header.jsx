@@ -5,7 +5,7 @@ const Header = () => {
     <div className="bg-[#0f0f0f] border-b-2 border-blue flex flex-row items-center justify-between p-4 py-8">
       <h1 className="julius text-2xl font-bold text-center">Linkfolio</h1>
       <nav>
-        <ul className="hidden lg:block quicksand flex justify-center text-[#474747] space-x-4">
+        <ul className="hidden lg:flex quicksand justify-center text-[#474747] space-x-4">
           <li>
             <Link href="/" className="hover:text-[#fff]">
               Home
