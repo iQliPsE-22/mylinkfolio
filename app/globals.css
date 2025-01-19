@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Itim&family=Julius+Sans+One&display=swap");
+
 /* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
@@ -12,4 +15,18 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+
+.quicksand {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.julius {
+  font-family: "Julius Sans One", sans-serif;
+}
+.itim {
+  font-family: "Itim", sans-serif;
 }

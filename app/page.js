@@ -1,20 +1,87 @@
+"use client";
 import Image from "next/image";
-import { Heading, Stack } from "@chakra-ui/react";
+import { useState } from "react";
+import Link from "next/link";
+import { Box, Field, Input, defineStyle, Heading } from "@chakra-ui/react";
 import { Button } from "./../components/ui/button";
-import Link from 'next/link';
+
+const floatingStyles = defineStyle({
+  pos: "absolute",
+  bg: "#8eaccd",
+  px: "0.5",
+  top: "-3",
+  insetStart: "2",
+  fontWeight: "normal",
+  pointerEvents: "none",
+  transition: "position",
+  _peerPlaceholderShown: {
+    color: "#f0f0f0",
+    top: "3",
+    insetStart: "3",
+  },
+  _peerFocusVisible: {
+    color: "fg",
+    top: "-3",
+    insetStart: "2",
+  },
+});
+
 export default function Home() {
+  const [link, setLink] = useState("");
+  const [loading, setLoading] = useState(false);
   return (
-    <main className="h-dvh flex flex-col">
-      <section className="h-[90%] flex items-center justify-center">
-        <div className="flex flex-col p-16 items-center justify-center bg-white rounded text-black">
-          <Heading className="p-4">
-            Let's Make your ATS Friendly Resume!
-          </Heading>
-          <Button variant="solid" className="bg-[#0f0f0f] text-[#fff] w-1/3">
-            <Link href="/signup">Let's Go</Link>
-          </Button>
+    <div className="flex flex-col items-center min-h-dvh pb-8">
+      <h1 className="quicksand text-lg wider lg:text-3xl font-bold text-[#f0f0f0] text-center mt-8 tracking-wider">
+        Link. Generate. Shine
+      </h1>
+      <h2 className="quicksand text-xl lg:text-4xl font-bold text-[#474747] text-center pt-3 p-8">
+        Make a <span className="text-[#405dbb] font-semibold">LINKFOLIO</span>
+      </h2>
+      <main className="w-full flex flex-col lg:flex-row items-center justify-center p-8 gap-4">
+        <div className="bg-[#8EACCD] p-6 lg:p-12 w-11/12 lg:w-1/2 rounded-lg mt-8 flex flex-col items-center justify-center shadow shadow-xl">
+          <section className="w-full flex flex-col items-center justify-center pb-8">
+            <Heading className="text-lg lg:text-xl p-4 tracking-wide">
+              Fetch Your Details From{" "}
+              <span className="text-[#405dbb]">LINKEDIN</span>
+            </Heading>
+            <form className="w-full p-2 flex justify-center lg:flex-row flex-col items-center gap-4">
+              <Field.Root>
+                <Box pos="relative" w="full">
+                  <Input
+                    placeholder=""
+                    css={{ "--error-color": "green" }}
+                    className="peer p-6 text-black"
+                    value={link}
+                    onChange={(e) => setLink(e.target.value)}
+                  />
+                  <Field.Label css={floatingStyles}>
+                    Enter LinkedIn Profile Link
+                  </Field.Label>
+                </Box>
+              </Field.Root>
+
+              <button
+                type="button"
+                className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 w-1/2 lg:w-1/4"
+                onClick={() => setLoading(true)}
+              >
+                {!loading ? "Generate" : "Generating..."}
+              </button>
+            </form>
+          </section>
         </div>
-      </section>
-    </main>
+
+        <div className="bg-[#8EACCD] p-8 lg:p-12 w-11/12 lg:w-1/2 rounded-lg mt-8 flex flex-col items-center justify-center shadow shadow-xl">
+          <section className="w-full flex flex-col items-center justify-center pb-8">
+            <Heading className="text-lg lg:text-xl p-4 tracking-wide">
+              Transform your <span className="text-[#405dbb]">RESUME</span>
+            </Heading>
+            <Link href="signup">
+              <Button size="xl" className = "w-full">Let's GO</Button>
+            </Link>
+          </section>
+        </div>
+      </main>
+    </div>
   );
 }

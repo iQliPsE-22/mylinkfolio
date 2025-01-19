@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Form from "./../../components/Form";
 import { Heading, Box, Group, Button } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
+
 import Education from "./../../components/Education";
 import Projects from "./../../components/Projects";
 import Certificates from "./../../components/Certificates";
 import Experience from "./../../components/Experience";
-import Skills from './../../components/Skills';
-
+import Skills from "./../../components/Skills";
 
 import {
   StepsCompletedContent,
@@ -23,7 +24,7 @@ import {
 const page = () => {
   const [submit_btn, setSubmit_btn] = useState(false);
   return (
-    <div className="min-h-dvh flex flex-col items-center justify-center rounded p-8 ">
+    <div className="flex flex-col items-center justify-center rounded p-8 ">
       <StepsRoot defaultStep={0} count={6} className="w-full lg:w-[60%]">
         <StepsList>
           <StepsItem index={0} title="Personal info" />
@@ -53,8 +54,15 @@ const page = () => {
           <Certificates submit_btn={true} />
         </StepsContent>
         <StepsCompletedContent>
-          All steps are complete!
-          <Link href="/resume">Resume</Link>
+          <section className="min-h-dvh flex flex-col items-center">
+            <Stack className = "w-full p-16 bg-[#0f0f0f] mt-4 lg:mt-16">
+              <Heading>🎉</Heading>
+              <Heading>All steps are complete!</Heading>
+              <Link href="/resume">
+                <Button variant="solid">Go to Your Resume</Button>
+              </Link>
+            </Stack>
+          </section>
         </StepsCompletedContent>
 
         <Group grow className="pt-0 p-4">

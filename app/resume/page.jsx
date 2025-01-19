@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useUser } from "../userContext";
 import { UserProvider } from "../userContext";
 import Link from "next/link";
-import { HStack } from "@chakra-ui/react";
+import { HStack, Heading } from "@chakra-ui/react";
 import { jsPDF } from "jspdf";
 import { Provider } from "./../../components/ui/provider";
 import { Button } from "./../../components/ui/button";
@@ -28,9 +28,9 @@ const Page = () => {
       callback: (doc) => {
         doc.save(`${user?.firstName || "resume"}.pdf`);
       },
-      x: 1,
-      y: 0,
-      html2canvas: { scale: 0.16 }, // Adjust scale if needed
+      x: -1,
+      y: 1,
+      html2canvas: { scale: 0.15 }, // Adjust scale if needed
     });
   };
   const styles = {
@@ -40,7 +40,7 @@ const Page = () => {
       backgroundColor: "white",
       boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
       fontFamily: "Arial, sans-serif",
-      fontSize: "14pt",
+      fontSize: "16pt",
       lineHeight: "1.4",
       color: "#333",
     },
@@ -64,6 +64,9 @@ const Page = () => {
       fontSize: "16pt",
       fontWeight: "bold",
       margin: "0 0 1mm 0",
+    },
+    p: {
+      fontSize: "16pt",
     },
     section: {
       marginBottom: "5mm",
@@ -90,6 +93,7 @@ const Page = () => {
     },
     educationItem: {
       marginBottom: "2mm",
+      fontSize: "16pt",
     },
     skillCategory: {
       fontWeight: "bold",
@@ -99,8 +103,8 @@ const Page = () => {
   return (
     <UserProvider>
       <Provider>
-        <section className="w-full flex justify-center p-8 text-sm ">
-          <div style={styles.page} className="pdf-content">
+        <section className="w-full flex flex-col justify-center p-8 text-sm ">
+          <div style={styles.page} className="pdf-content hidden lg:block">
             <header style={styles.header}>
               <h1
                 style={styles.h1}
@@ -131,7 +135,7 @@ const Page = () => {
             <section style={styles.section}>
               <h2 style={styles.h2}>TECHNICAL SKILLS</h2>
               {skills.map((skill, index) => (
-                <p key={index}>
+                <p key={index} style={styles.p}>
                   <span style={styles.skillCategory}>{skill.category}:</span>{" "}
                   {skill.name}
                 </p>
@@ -204,8 +208,15 @@ const Page = () => {
               </ul>
             </section>
           </div>
-
-          <Button onClick={downloadPDF} colorPaletter={"red"}>
+          <Heading size="sm" className="pt-4 pb-4 lg:hidden">
+            Your ATS Friendly Resume is Ready to Download!
+          </Heading>
+          <Button
+            colorPalette="teal"
+            size="xl"
+            variant="solid"
+            onClick={downloadPDF}
+          >
             Download
           </Button>
         </section>
