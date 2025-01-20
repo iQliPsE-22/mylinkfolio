@@ -2,11 +2,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
-import { Box, Field, Input, defineStyle, Heading } from "@chakra-ui/react";
+import { Box, Field, Input, defineStyle, Heading,Text } from "@chakra-ui/react";
 import { Button } from "./../components/ui/button";
 import { useRouter } from "next/navigation";
 import Custom from "./../components/Custom";
 import { useUser } from "./userContext.jsx";
+import { SkeletonText } from "@/components/ui/skeleton";
+
 const floatingStyles = defineStyle({
   pos: "absolute",
   bg: "#8eaccd",
@@ -53,6 +55,7 @@ export default function Home() {
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
+
       const data = await response.json();
       console.log(data);
       setLinkedinData(data.data);
@@ -119,7 +122,7 @@ export default function Home() {
         project: fetchedProjects || "",
       });
       console.log(user);
-      setLoading(false);
+      router.push("/signup");
     } catch (err) {
       setError(err.message);
       setLoading(false);
@@ -135,42 +138,49 @@ export default function Home() {
         Make a <span className="text-[#405dbb] font-semibold">LINKFOLIO</span>
       </h2>
       <main className="w-full flex flex-col lg:flex-row items-center justify-center p-8 gap-4">
-        <div className="bg-[#8EACCD] p-6 lg:p-12 w-11/12 lg:w-1/2 rounded-lg mt-8 flex flex-col items-center justify-center shadow shadow-xl">
-          <section className="w-full flex flex-col items-center justify-center pb-8">
-            <Heading className="text-lg lg:text-xl p-4 tracking-wide">
-              Fetch Your Details From{" "}
-              <span className="text-[#405dbb]">LINKEDIN</span>
-            </Heading>
-            <form
-              className="w-full p-2 flex justify-center lg:flex-row flex-col items-center gap-4"
-              onSubmit={handleFetchUserData}
-            >
-              <Field.Root>
-                <Box pos="relative" w="full">
-                  <Input
-                    placeholder=""
-                    css={{ "--error-color": "green" }}
-                    className="peer p-6 text-black"
-                    value={userUrl}
-                    onChange={(e) => setUserUrl(e.target.value)}
-                  />
-                  <Field.Label css={floatingStyles}>
-                    Enter LinkedIn Profile Link
-                  </Field.Label>
-                </Box>
-              </Field.Root>
-
-              <button
-                type="button"
-                className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 w-1/2 lg:w-1/4"
-                onClick={handleFetchUserData}
+        {loading ? (
+          <div className="bg-[#8EACCD] p-6 lg:p-14 w-11/12 lg:w-1/2 rounded-lg mt-8 flex flex-col items-center justify-center shadow shadow-xl">
+            <SkeletonText noOfLines={5} gap="4" className="bg-white" />
+          </div>
+        ) : (
+          <div className="bg-[#8EACCD] p-6 lg:p-12 w-11/12 lg:w-1/2 rounded-lg mt-8 flex flex-col items-center justify-center shadow shadow-xl">
+            <section className="w-full flex flex-col items-center justify-center pb-8">
+              <Heading className="text-lg lg:text-xl p-4 tracking-wide">
+                Fetch Your Details From{" "}
+                <span className="text-[#405dbb]">LINKEDIN</span>
+                {error && <Text className="text-red">{error}</Text>}
+              </Heading>
+              <form
+                className="w-full p-2 flex justify-center lg:flex-row flex-col items-center gap-4"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleFetchUserData();
+                }}
               >
-                {!loading ? "Generate" : "Generating..."}
-              </button>
-            </form>
-          </section>
-        </div>
-
+                <Field.Root>
+                  <Box pos="relative" w="full">
+                    <Input
+                      placeholder=""
+                      css={{ "--error-color": "green" }}
+                      className="peer p-6 text-black"
+                      value={userUrl}
+                      onChange={(e) => setUserUrl(e.target.value)}
+                    />
+                    <Field.Label css={floatingStyles}>
+                      Enter LinkedIn Profile Link
+                    </Field.Label>
+                  </Box>
+                </Field.Root>
+                <button
+                  type="submit"
+                  className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 w-1/2 lg:w-1/4"
+                >
+                  Fetch
+                </button>
+              </form>
+            </section>
+          </div>
+        )}
         <Custom />
       </main>
     </div>

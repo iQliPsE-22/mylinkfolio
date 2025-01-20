@@ -40,9 +40,9 @@ const Education = () => {
         Before Proceeding, We need some Info!
       </Text>
 
-      {forms.length > 4 && (
+      {forms.length > 3 && (
         <Text className="text-red-500">
-          Please choose at most top 4 Education Milestones
+          Please choose at most top 3 Education Milestones
         </Text>
       )}
 

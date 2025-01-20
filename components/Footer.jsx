@@ -6,7 +6,9 @@ import {
   faInstagram,
   faTwitter,
   faLinkedin,
+  faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+
 import Link from "next/link";
 const Footer = () => {
   return (
@@ -15,16 +17,13 @@ const Footer = () => {
         <Headline heading={"Resume Lab"} text={"Your ATS Friendly Resume"} />
       </div>
       <div className="w-full lg:w-1/5 mt-4 flex flex-row items-center justify-around">
-        <Link href="#" className="w-8">
-          <FontAwesomeIcon icon={faFacebook} className="icon" />
-        </Link>
-        <Link href="#" className="w-8">
+        <Link href="https://www.instagram.com/iqlipse_22/" className="w-8">
           <FontAwesomeIcon icon={faInstagram} className="icon" />
         </Link>
-        <Link href="#" className="w-8">
-          <FontAwesomeIcon icon={faTwitter} className="icon" />
+        <Link href="https://github.com/iQliPsE-22/resumelab" className="w-8">
+          <FontAwesomeIcon icon={faGithub} className="icon" />
         </Link>
-        <Link href="#" className="w-8">
+        <Link href="https://www.linkedin.com/in/deepak2004/" className="w-8">
           <FontAwesomeIcon icon={faLinkedin} className="icon" />
         </Link>
       </div>

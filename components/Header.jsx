@@ -17,15 +17,15 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href="/about" className="hover:text-[#fff]">
+            <Link href="https://www.linkedin.com/in/deepak2004/" className="hover:text-[#fff]">
               Contact Us
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/about" className="hover:text-[#fff]">
               Login/Signup
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>
