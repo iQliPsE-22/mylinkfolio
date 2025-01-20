@@ -30,58 +30,61 @@ const Page = () => {
       },
       x: 0,
       y: 0,
-      html2canvas: { scale: 0.26 }, // Adjust scale if needed
+      html2canvas: { scale: 0.27 }, // Adjust scale if needed
     });
   };
   const styles = {
     page: {
       height: "297mm",
       width: "210mm",
-      padding: "15mm",
+      padding: "10mm",
+      paddingLeft: "12mm",
       margin: "0 auto",
       backgroundColor: "white",
       boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
       fontFamily: "Arial, sans-serif",
       fontSize: "10pt",
-      lineHeight: "1.4",
+      lineHeight: "1.3",
       color: "#333",
     },
     header: {
       textAlign: "center",
-      marginBottom: "3mm",
+      marginBottom: "1mm",
     },
     h1: {
-      fontSize: "16pt",
+      fontSize: "14pt",
       fontWeight: "bold",
     },
     h2: {
       fontSize: "11pt",
       fontWeight: "bold",
       borderBottom: "1px solid #333",
-      marginBottom: "2mm",
+      // marginBottom: "1mm",
       paddingBottom: "2mm",
     },
     h3: {
       fontSize: "10pt",
       fontWeight: "bold",
-      margin: "0 0 1mm 0",
     },
     p: {
       fontSize: "10pt",
+      margin:"0 0 0 0",
+
     },
     section: {
-      marginBottom: "5mm",
+      marginBottom: "3mm",
     },
     ul: {
       fontSize: "10pt",
-      marginTop: "2mm",
+      marginTop: "1mm",
       marginBottom: "2mm",
-      paddingLeft: "5mm",
+      paddingLeft: "4mm",
+      // textAlign: "justify",
       listStyleType: "disc",
-      textAlign:"justify",
     },
     li: {
       marginBottom: "1mm",
+      // textAlign: "justify",
     },
     link: {
       color: "#1154cc",
@@ -106,7 +109,7 @@ const Page = () => {
     <UserProvider>
       <Provider>
         <section className="w-full flex lg:flex-row flex-col justify-center lg:p-8 mb-4">
-          <main className = "w-full overflow-scroll lg:overflow-hidden">
+          <main className="w-full overflow-scroll lg:overflow-hidden">
             <div style={styles.page} className="pdf-content">
               <header style={styles.header}>
                 <h1
@@ -221,14 +224,14 @@ const Page = () => {
               Your ATS Friendly Resume is Ready to Download!
             </Heading>
           </main>
-            <Button
-              colorPalette="teal"
-              size="xl"
-              variant="solid"
-              onClick={downloadPDF} 
-            >
-              Download
-            </Button>
+          <Button
+            colorPalette="teal"
+            size="xl"
+            variant="solid"
+            onClick={downloadPDF}
+          >
+            Download
+          </Button>
         </section>
       </Provider>
     </UserProvider>

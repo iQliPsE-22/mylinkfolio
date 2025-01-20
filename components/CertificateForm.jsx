@@ -1,8 +1,11 @@
 "use client";
 import { useState } from "react";
-import { Stack, Input, Button, Heading, HStack } from "@chakra-ui/react";
+import { Stack, Input, Button, Heading, HStack, Text } from "@chakra-ui/react";
 import { Field } from "./ui/field";
 import { useUser } from "../app/userContext";
+import Certificates from "./Certificates";
+import { Tooltip } from "./ui/tooltip";
+import { CiCircleInfo } from "react-icons/ci";
 
 const CertificateForm = ({ heading, index }) => {
   const { user, setUser } = useUser();
@@ -21,6 +24,10 @@ const CertificateForm = ({ heading, index }) => {
 
     setUser({ ...user, certificates: updatedCertificates });
     console.log("Updated certificates:", updatedCertificates);
+  };
+
+  const countWords = (text) => {
+    return text.length;
   };
 
   return (
@@ -63,6 +70,25 @@ const CertificateForm = ({ heading, index }) => {
             })
           }
         />
+
+        <Text mt={2} color="gray.500" className="flex flex-row items-center">
+          Count:{" "}
+          {countWords(
+            certificateInfo.description +
+              certificateInfo.name +
+              certificateInfo.org
+          )}
+          <Tooltip
+            showArrow
+            content="Suggestion: We suggest Maximum 100 Characters."
+            openDelay={100}
+            closeDelay={100}
+          >
+            <Button variant="filled" size="lg" className="rounded-full">
+              <CiCircleInfo />
+            </Button>
+          </Tooltip>
+        </Text>
       </Field>
 
       <Button type="submit" variant="solid" colorScheme="blue" w="50%">
