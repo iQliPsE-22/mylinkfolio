@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Heading, Text } from "@chakra-ui/react";
 import { useUser } from "../app/userContext";
-import CertificateForm from './CertificateForm';
+import CertificateForm from "./CertificateForm";
 
 const Certificates = () => {
   const { user, setUser } = useUser();
@@ -28,7 +28,7 @@ const Certificates = () => {
   const deleteForm = (index) => {
     const updatedForms = forms.filter((_, i) => i !== index);
     setForms(updatedForms);
-    setUser({ ...user, certificate: updatedForms });
+    setUser({ ...user, certificates: updatedForms });
   };
 
   return (
@@ -37,12 +37,22 @@ const Certificates = () => {
       <Text fontSize="sm" color="fg.muted">
         Before Proceeding, We need some Info!
       </Text>
+      {forms.length > 4 && (
+        <Text className="text-red-500">
+          Please choose at most top 4 certificates you have achieved in your
+          career.
+        </Text>
+      )}
       {forms.map((certificate, index) => (
         <div
           key={index}
           className="p-2 w-full lg:w-3/4 flex flex-col items-center justify-center"
         >
-          <CertificateForm heading={`${index + 1}`} data={certificate} index={index} />
+          <CertificateForm
+            heading={`${index + 1}`}
+            data={certificate}
+            index={index}
+          />
           <Button
             variant="outline"
             colorScheme="red"

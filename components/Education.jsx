@@ -39,6 +39,13 @@ const Education = () => {
       <Text fontSize="sm" color="fg.muted">
         Before Proceeding, We need some Info!
       </Text>
+
+      {forms.length > 4 && (
+        <Text className="text-red-500">
+          Please choose at most top 4 Education Milestones
+        </Text>
+      )}
+
       {forms.map((education, index) => (
         <div
           key={index}

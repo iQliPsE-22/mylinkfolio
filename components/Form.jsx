@@ -29,20 +29,14 @@ const Personal = ({ submit_btn }) => {
       <Text fontSize="sm" color="fg.muted">
         Before Proceeding, We need some Info!
       </Text>
-      <Field label="First Name" required>
+      <Field label="Name" required>
         <Input
-          placeholder="Enter your First Name"
-          value={user?.firstName || ""}
-          onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+          placeholder="Enter your Full Name"
+          value={user?.fullName || ""}
+          onChange={(e) => setUser({ ...user, fullName: e.target.value })}
         />
       </Field>
-      <Field label="Last Name" required>
-        <Input
-          placeholder="Enter your Last Name"
-          value={user?.lastName || ""}
-          onChange={(e) => setUser({ ...user, lastName: e.target.value })}
-        />
-      </Field>
+
       <Field label="Email" required helperText="We'll never share your email.">
         <Input
           placeholder="Enter your email"

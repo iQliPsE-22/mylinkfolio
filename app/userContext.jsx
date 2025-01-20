@@ -11,8 +11,7 @@ export const UserProvider = ({ children }) => {
         return storedUserData
           ? JSON.parse(storedUserData)
           : {
-              firstName: "",
-              lastName: "",
+              fullName: "",
               email: "",
               phone: "",
               github: "",
@@ -26,8 +25,7 @@ export const UserProvider = ({ children }) => {
       } catch (error) {
         console.error("Error parsing userData from localStorage", error);
         return {
-          firstName: "",
-          lastName: "",
+          fullName: "",
           email: "",
           phone: "",
           github: "",
@@ -41,8 +39,7 @@ export const UserProvider = ({ children }) => {
       }
     }
     return {
-      firstName: "",
-      lastName: "",
+      fullName: "",
       email: "",
       phone: "",
       github: "",

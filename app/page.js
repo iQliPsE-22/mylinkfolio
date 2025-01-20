@@ -6,7 +6,7 @@ import { Box, Field, Input, defineStyle, Heading } from "@chakra-ui/react";
 import { Button } from "./../components/ui/button";
 import { useRouter } from "next/navigation";
 import Custom from "./../components/Custom";
-
+import { useUser } from "./userContext.jsx";
 const floatingStyles = defineStyle({
   pos: "absolute",
   bg: "#8eaccd",
@@ -28,38 +28,103 @@ const floatingStyles = defineStyle({
   },
 });
 
-const handleformSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  try {
-    const response = await fetch(
-      "http://localhost:5000/api/linkedin/get-data",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ url: link }),
-      }
-    );
-    const data = await response.json();
-    setLoading(false);
-    setLinkedinData(data);
-    console.log(data);
-    if (linkedinData) {
-      router.push("/portfolio");
-    }
-  } catch (err) {
-    console.log(err);
-  }
-  console.log(link);
-};
-
 export default function Home() {
   const router = useRouter();
-  const { linkedinData, setLinkedinData } = useState();
-  const [link, setLink] = useState("");
+  const { user, setUser } = useUser();
+  const [linkedinData, setLinkedinData] = useState(null);
+  const [userUrl, setUserUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleFetchUserData = async () => {
+    setLoading(true);
+    const url = `https://fresh-linkedin-profile-data.p.rapidapi.com/get-linkedin-profile?linkedin_url=${userUrl}%2F&include_skills=false&include_certifications=true&include_publications=false&include_honors=false&include_volunteers=false&include_projects=true&include_patents=false&include_courses=false&include_organizations=false&include_profile_status=false&include_company_public_url=false`;
+
+    const options = {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "a3ecef6823msh7a112161d1b16cep1ef573jsndc3ab7a2a9dd",
+        "x-rapidapi-host": "fresh-linkedin-profile-data.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+      const data = await response.json();
+      console.log(data);
+      setLinkedinData(data.data);
+      const fetchedData = data.data;
+      const fetchedEducations = fetchedData.educations.map((item) => ({
+        school: item.school || "",
+        degree: item.degree || "",
+        stream: item.field_of_study || "",
+        grade: item.activities.replace("Grade: ", "") || "",
+        start: `${item.start_month || ""} ${item.start_year || ""}`.trim(),
+        end: `${item.end_month || ""} ${item.end_year || ""}`.trim(),
+        location: "",
+      }));
+
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      const fetchedExperiences = fetchedData.experiences.map((item) => ({
+        organization: item.company || "",
+        role: item.title || "",
+        start: `${item.start_month ? monthNames[item.start_month - 1] : ""} ${
+          item.start_year || ""
+        }`.trim(),
+        end: `${item.end_month ? monthNames[item.end_month - 1] : ""} ${
+          item.end_year || ""
+        }`.trim(),
+        location: item.location || "",
+        point1: item.description.split(".")[0] || "",
+        point2: item.description.split(".")[1] || "",
+        point3: item.description.split(".")[2] || "",
+      }));
+
+      const fetchedCertificates = fetchedData.certifications.map((item) => ({
+        name: item.name || "",
+        org: item.authority || "",
+        description: item.description || "",
+      }));
+
+      const fetchedProjects = fetchedData.projects.map((item) => ({
+        name: item.name || "",
+        description: item.description || "",
+      }));
+      setUser({
+        fullName: fetchedData?.full_name || "",
+        email: fetchedData?.email || "",
+        phone: fetchedData?.phone || "",
+        github: fetchedData?.github || "",
+        linkedin: fetchedData?.linkedin_url || "",
+        education: fetchedEducations || "",
+        experience: fetchedExperiences || "",
+        certificates: fetchedCertificates || "",
+        project: fetchedProjects || "",
+      });
+      console.log(user);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center min-h-dvh pb-8">
@@ -78,7 +143,7 @@ export default function Home() {
             </Heading>
             <form
               className="w-full p-2 flex justify-center lg:flex-row flex-col items-center gap-4"
-              onSubmit={handleformSubmit}
+              onSubmit={handleFetchUserData}
             >
               <Field.Root>
                 <Box pos="relative" w="full">
@@ -86,8 +151,8 @@ export default function Home() {
                     placeholder=""
                     css={{ "--error-color": "green" }}
                     className="peer p-6 text-black"
-                    value={link}
-                    onChange={(e) => setLink(e.target.value)}
+                    value={userUrl}
+                    onChange={(e) => setUserUrl(e.target.value)}
                   />
                   <Field.Label css={floatingStyles}>
                     Enter LinkedIn Profile Link
@@ -98,7 +163,7 @@ export default function Home() {
               <button
                 type="button"
                 className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 w-1/2 lg:w-1/4"
-                onClick={() => setLoading(true)}
+                onClick={handleFetchUserData}
               >
                 {!loading ? "Generate" : "Generating..."}
               </button>

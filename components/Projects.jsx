@@ -37,6 +37,11 @@ const Projects = () => {
       <Text fontSize="sm" color="fg.muted">
         Before Proceeding, We need some Info!
       </Text>
+      {user.project.length > 4 && (
+        <Text className="text-red-500">
+          Please Choose atmost top 4 Projects you have
+        </Text>
+      )}
       {forms.map((project, index) => (
         <div
           key={index}
