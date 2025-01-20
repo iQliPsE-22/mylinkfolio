@@ -68,8 +68,7 @@ const Page = () => {
     },
     p: {
       fontSize: "10pt",
-      margin:"0 0 0 0",
-
+      margin: "0 0 0 0",
     },
     section: {
       marginBottom: "3mm",
@@ -112,9 +111,10 @@ const Page = () => {
           <main className="w-full overflow-scroll lg:overflow-hidden">
             <div style={styles.page} className="pdf-content">
               <header style={styles.header}>
-                <h1
-                  style={styles.h1}
-                >{`${user?.firstName.toUpperCase()} ${user?.lastName.toUpperCase()}`}</h1>
+                <h1 style={styles.h1}>
+                  {`${user?.firstName.toUpperCase()}`}{" "}
+                  {`${user?.lastName.toUpperCase()}`}
+                </h1>
                 <p>
                   {user?.email} | {user?.phone} |{" "}
                   <span style={styles.link}>{user?.linkedin}</span> |{" "}
