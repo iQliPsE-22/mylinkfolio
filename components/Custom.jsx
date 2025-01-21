@@ -14,7 +14,7 @@ const Custom = ({ setFakeLoading }) => {
 
   return (
     <div className="bg-white p-6 lg:p-16 w-full lg:w-1/2 rounded-lg shadow-lg mt-8 text-black">
-      <section className="w-full flex flex-col items-center justify-center ">
+      <section className="w-full flex flex-col items-center justify-center pb-8 lg:pb-0 ">
         <Heading className="text-lg lg:text-xl p-4 tracking-wide">
           Transform your <span className="text-[#405dbb]">RESUME</span>
         </Heading>

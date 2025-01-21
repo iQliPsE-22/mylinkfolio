@@ -10,14 +10,6 @@ const Personal = ({ submit_btn }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("User", user);
-    // setUser({
-    //   firstName: "",
-    //   lastName: "",
-    //   email: "",
-    //   phone: "",
-    //   github: "",
-    //   linkedin: "",
-    // });
   };
 
   return (

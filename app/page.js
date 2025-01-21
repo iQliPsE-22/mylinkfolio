@@ -104,9 +104,9 @@ export default function Home() {
           item.end_year || ""
         }`.trim(),
         location: item.location || "",
-        point1: item.description.split(".")[0] || "",
-        point2: item.description.split(".")[1] || "",
-        point3: item.description.split(".")[2] || "",
+        point1: item.description.split(".")[0].replace(/^[^a-zA-Z0-9]+/, "") || "",
+        point2: item.description.split(".")[1]?.replace(/^[^a-zA-Z0-9]+/, "") || "",
+        point3: item.description.split(".")[2]?.replace(/^[^a-zA-Z0-9]+/, "") || "",
       }));
 
       const fetchedCertificates = fetchedData.certifications.map((item) => ({
@@ -159,7 +159,7 @@ export default function Home() {
         ) : (
           <div className="bg-white p-6 lg:p-16 w-full lg:w-1/2 rounded-lg shadow-lg mt-8 text-black">
             <section className="w-full flex flex-col items-center justify-center pb-8">
-              <Heading className="text-lg lg:text-xl p-4 tracking-wide">
+              <Heading className="text-lg lg:text-xl p-4 tracking-wide text-center">
                 Fetch Your Details From{" "}
                 <span className="text-[#405dbb]">LinkedIn</span>
               </Heading>
@@ -186,7 +186,7 @@ export default function Home() {
                 </Field.Root>
                 <button
                   type="submit"
-                  className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 px-6"
+                  className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 px-6 w-full lg:w-1/3"
                 >
                   Fetch
                 </button>
