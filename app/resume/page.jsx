@@ -116,9 +116,19 @@ const Page = () => {
               <header style={styles.header}>
                 <h1 style={styles.h1}>{`${user?.fullName.toUpperCase()}`} </h1>
                 <p>
-                  {user?.email} | {user?.phone} |{" "}
-                  <span style={styles.link}>{user?.linkedin}</span> |{" "}
-                  <span style={styles.link}>{user?.github}</span>
+                  {user?.email} | {user?.phone}
+                  {user?.linkedin && (
+                    <>
+                      {" | "}
+                      <span style={styles.link}>{user?.linkedin}</span>
+                    </>
+                  )}
+                  {user?.github && (
+                    <>
+                      {" | "}
+                      <span style={styles.link}>{user?.github}</span>
+                    </>
+                  )}
                 </p>
               </header>
 

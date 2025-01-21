@@ -2,7 +2,14 @@
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
-import { Box, Field, Input, defineStyle, Heading,Text } from "@chakra-ui/react";
+import {
+  Box,
+  Field,
+  Input,
+  defineStyle,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
 import { Button } from "./../components/ui/button";
 import { useRouter } from "next/navigation";
 import Custom from "./../components/Custom";
@@ -13,14 +20,14 @@ const floatingStyles = defineStyle({
   pos: "absolute",
   bg: "#8eaccd",
   px: "0.5",
-  top: "-3",
+  top: "3",
   insetStart: "2",
   fontWeight: "normal",
   pointerEvents: "none",
   transition: "position",
   _peerPlaceholderShown: {
-    color: "#f0f0f0",
-    top: "3",
+    color: "#474757",
+    top: "3.5",
     insetStart: "3",
   },
   _peerFocusVisible: {
@@ -131,13 +138,13 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center min-h-dvh pb-8">
-      <h1 className="quicksand text-lg wider lg:text-3xl font-bold text-[#f0f0f0] text-center mt-8 tracking-wider">
+      <h1 className="quicksand text-2xl wider lg:text-3xl font-bold text-[#f0f0f0] text-center mt-8 tracking-wider">
         Link. Generate. Shine
       </h1>
-      <h2 className="quicksand text-xl lg:text-4xl font-bold text-[#474747] text-center pt-3 p-8">
+      <h2 className="quicksand text-2xl lg:text-4xl font-bold text-[#474747] text-center pt-3 p-8">
         Make a <span className="text-[#405dbb] font-semibold">LINKFOLIO</span>
       </h2>
-      <main className="w-full flex flex-col lg:flex-row items-center justify-center p-8 gap-4">
+      <main className="min-h-dvh w-full flex flex-col lg:flex-row items-center justify-start p-3 lg:p-8 gap-4">
         {loading ? (
           <div className="bg-[#8EACCD] p-6 lg:p-14 w-11/12 lg:w-1/2 rounded-lg mt-8 flex flex-col items-center justify-center shadow shadow-xl">
             <SkeletonText noOfLines={5} gap="4" className="bg-white" />
@@ -173,7 +180,7 @@ export default function Home() {
                 </Field.Root>
                 <button
                   type="submit"
-                  className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 w-1/2 lg:w-1/4"
+                  className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 w-full lg:w-1/4"
                 >
                   Fetch
                 </button>

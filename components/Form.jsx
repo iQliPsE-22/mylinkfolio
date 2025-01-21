@@ -22,7 +22,7 @@ const Personal = ({ submit_btn }) => {
 
   return (
     <form
-      className="h-fit p-8 pb-4 w-full flex flex-col items-center justify-center space-y-4"
+      className="h-fit p-4 lg:p-8 pb-4 w-full flex flex-col items-center justify-center space-y-4"
       onSubmit={handleFormSubmit}
     >
       <Heading>Personal Information</Heading>
