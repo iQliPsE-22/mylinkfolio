@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">📄 Linkfolio - Next.js Resume Builder</h1>
+  <p align="center">
+    <strong>Link. Generate. Shine.</strong><br>
+    Build professional resumes effortlessly by fetching LinkedIn data.
+  </p>
 
-## Getting Started
+  <div align="center">
+    ![image](https://github.com/user-attachments/assets/371c1568-2378-4d5b-9734-4a4fd4bb62c3)
+  </div>
 
-First, run the development server:
+  <h2>✨ Features</h2>
+  <ul>
+    <li>Fetch LinkedIn data seamlessly using the RapidAPI LinkedIn Profile Data API.</li>
+    <li>Create professional resumes with LinkedIn project, certification, and work history details.</li>
+    <li>Interactive and responsive design powered by <code>Next.js</code> and <code>Chakra UI</code>.</li>
+    <li>Customizable forms for adding or editing fetched data.</li>
+  </ul>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  <h2>🚀 Tech Stack</h2>
+  <ul>
+    <li><strong>Framework:</strong> Next.js</li>
+    <li><strong>Styling:</strong> Tailwind CSS and Chakra UI</li>
+    <li><strong>API Integration:</strong> RapidAPI LinkedIn Profile Data</li>
+    <li><strong>State Management:</strong> React Hooks</li>
+  </ul>
+  
+  <h2>⚙️ Getting Started</h2>
+  <h3>1. Prerequisites</h3>
+  <ul>
+    <li>Node.js >= 14.x</li>
+    <li>NPM or Yarn</li>
+    <li>RapidAPI Key (for LinkedIn API)</li>
+  </ul>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  <h3>2. Installation</h3>
+  <pre>
+  git clone https://github.com/your-username/linkfolio.git
+  cd linkfolio
+  npm install
+  </pre>
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+  <h3>3. Set Environment Variables</h3>
+  Create a `.env.local` file in the root directory:
+  <pre>
+  RAPIDAPI_KEY=your-rapidapi-key
+  </pre>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  <h3>4. Run the Development Server</h3>
+  <pre>
+  npm run dev
+  </pre>
+  Visit <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> in your browser.
 
-## Learn More
+  <h2>🎨 Screenshots</h2>
+  
+  <p>LinkedIn Fetch</p>
+  ![image](https://github.com/user-attachments/assets/1345a75a-1e6c-44c0-800d-5fc33f6a4585)
 
-To learn more about Next.js, take a look at the following resources:
+  <p>Resume</p>
+  ![image](https://github.com/user-attachments/assets/ff8b8bb4-0b35-4da5-9310-b1923ee3a754)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  <h2>🤝 Contributing</h2>
+  <ol>
+    <li>Fork the repository.</li>
+    <li>Create a new branch (<code>feature/your-feature-name</code>).</li>
+    <li>Commit your changes (<code>git commit -m "Add your feature"</code>).</li>
+    <li>Push to the branch (<code>git push origin feature/your-feature-name</code>).</li>
+    <li>Open a pull request.</li>
+  </ol>
 
-## Deploy on Vercel
+  <h2>📄 License</h2>
+  <p>This project is licensed under the <a href="LICENSE" target="_blank">MIT License</a>.</p>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  <h2>📧 Contact</h2>
+  <p>For inquiries, reach out to <strong>Deepak Kumar (iQlipse)</strong>:</p>
+  <ul>
+    <li><strong>Email:</strong> your-email@example.com</li>
+    <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/your-profile" target="_blank">linkedin.com/in/your-profile</a></li>
+    <li><strong>Portfolio:</strong> <a href="https://www.iqlipse.studio" target="_blank">iqlipse.studio</a></li>
+  </ul>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
