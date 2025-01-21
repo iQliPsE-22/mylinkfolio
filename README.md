@@ -55,9 +55,9 @@
   
   <p>LinkedIn Fetch</p>
   ![image](https://github.com/user-attachments/assets/1345a75a-1e6c-44c0-800d-5fc33f6a4585)
-
   <p>Resume</p>
-  ![image](https://github.com/user-attachments/assets/ff8b8bb4-0b35-4da5-9310-b1923ee3a754)
+  ![image](https://github.com/user-attachments/assets/3fd2b66a-5a24-47f6-bfa7-a7cc6ad58bca)
+
 
 
   <h2>🤝 Contributing</h2>
@@ -68,9 +68,6 @@
     <li>Push to the branch (<code>git push origin feature/your-feature-name</code>).</li>
     <li>Open a pull request.</li>
   </ol>
-
-  <h2>📄 License</h2>
-  <p>This project is licensed under the <a href="LICENSE" target="_blank">MIT License</a>.</p>
 
   <h2>📧 Contact</h2>
   <p>For inquiries, reach out to <strong>Deepak Kumar (iQlipse)</strong>:</p>
