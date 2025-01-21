@@ -18,7 +18,7 @@ import { SkeletonText } from "@/components/ui/skeleton";
 
 const floatingStyles = defineStyle({
   pos: "absolute",
-  bg: "#8eaccd",
+  bg: "fg",
   px: "0.5",
   top: "3",
   insetStart: "2",
@@ -31,7 +31,7 @@ const floatingStyles = defineStyle({
     insetStart: "3",
   },
   _peerFocusVisible: {
-    color: "fg",
+    color: "bg.muted",
     top: "-3",
     insetStart: "2",
   },
@@ -137,28 +137,35 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-dvh pb-8">
-      <h1 className="quicksand text-2xl wider lg:text-3xl font-bold text-[#f0f0f0] text-center mt-8 tracking-wider">
-        Link. Generate. Shine
-      </h1>
-      <h2 className="quicksand text-2xl lg:text-4xl font-bold text-[#474747] text-center pt-3 p-8">
-        Make a <span className="text-[#405dbb] font-semibold">LINKFOLIO</span>
-      </h2>
-      <main className="min-h-dvh w-full flex flex-col lg:flex-row items-center justify-start p-3 lg:p-8 gap-4">
+    <div className="flex flex-col items-center min-h-screen pb-8 bg-gradient-to-b from-[#405dbb] to-[#8EACCD] text-white">
+      {/* Hero Section */}
+      <header className="w-full text-center py-10">
+        <h1 className="quicksand text-4xl lg:text-5xl font-bold mb-4">
+          Your Professional Journey Starts Here
+        </h1>
+        <p className="text-md lg:text-xl w-full lg:max-w-3xl mx-auto text-[#474757]">
+          Transform your LinkedIn profile into a stunning resume with just one
+          click. Showcase your skills, experience, and projects effortlessly.
+        </p>
+      </header>
+
+      {/* Main Content */}
+      <main className="min-h-dvh flex flex-col lg:flex-row items-start justify-center w-full pb-8 px-6 gap-10">
+        {/* Fetch Section */}
         {loading ? (
-          <div className="bg-[#8EACCD] p-6 lg:p-14 w-11/12 lg:w-1/2 rounded-lg mt-8 flex flex-col items-center justify-center shadow shadow-xl">
-            <SkeletonText noOfLines={5} gap="4" className="bg-white" />
+          <div className="bg-white p-6 lg:p-14 w-full lg:w-1/2 rounded-lg shadow-lg mt-8">
+            <SkeletonText noOfLines={5} gap="4" className="bg-gray-200" />
           </div>
         ) : (
-          <div className="bg-[#8EACCD] p-6 lg:p-12 w-11/12 lg:w-1/2 rounded-lg mt-8 flex flex-col items-center justify-center shadow shadow-xl">
+          <div className="bg-white p-6 lg:p-16 w-full lg:w-1/2 rounded-lg shadow-lg mt-8 text-black">
             <section className="w-full flex flex-col items-center justify-center pb-8">
               <Heading className="text-lg lg:text-xl p-4 tracking-wide">
                 Fetch Your Details From{" "}
-                <span className="text-[#405dbb]">LINKEDIN</span>
-                {error && <Text className="text-red">{error}</Text>}
+                <span className="text-[#405dbb]">LinkedIn</span>
               </Heading>
+              {error && <Text className="text-red-500">{error}</Text>}
               <form
-                className="w-full p-2 flex justify-center lg:flex-row flex-col items-center gap-4"
+                className="w-full flex flex-col lg:flex-row items-center gap-4 mt-4"
                 onSubmit={(e) => {
                   e.preventDefault();
                   handleFetchUserData();
@@ -168,8 +175,7 @@ export default function Home() {
                   <Box pos="relative" w="full">
                     <Input
                       placeholder=""
-                      css={{ "--error-color": "green" }}
-                      className="peer p-6 text-black"
+                      className="peer p-6 text-black border border-gray-300 rounded-md"
                       value={userUrl}
                       onChange={(e) => setUserUrl(e.target.value)}
                     />
@@ -180,16 +186,52 @@ export default function Home() {
                 </Field.Root>
                 <button
                   type="submit"
-                  className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 w-full lg:w-1/4"
+                  className="bg-[#405dbb] hover:bg-[#2e4387] text-white rounded-md h-12 px-6"
                 >
                   Fetch
                 </button>
               </form>
             </section>
+            <h1 className = "quicksand text-2xl lg:text-4xl font-bold text-[#474747] text-center pt-3 p- pb-5">
+              Link. Generate. Shine
+            </h1>
           </div>
         )}
+
+        {/* Custom Section */}
         <Custom />
       </main>
+
+      {/* Features Section */}
+      <section className="w-full text-center py-10 px-6 bg-[#ffffff11]">
+        <h2 className="text-2xl lg:text-3xl font-bold mb-6">Why Choose Us?</h2>
+        <div className="flex flex-col lg:flex-row gap-6 max-w-6xl mx-auto">
+          <div className="flex-1 bg-white text-black p-6 rounded-lg shadow-lg">
+            <h3 className="font-bold text-xl mb-2">Effortless Conversion</h3>
+            <p>
+              Turn your LinkedIn profile into a polished resume with minimal
+              effort.
+            </p>
+          </div>
+          <div className="flex-1 bg-white text-black p-6 rounded-lg shadow-lg">
+            <h3 className="font-bold text-xl mb-2">Modern Design</h3>
+            <p>
+              Choose from multiple templates that suit your professional needs.
+            </p>
+          </div>
+          <div className="flex-1 bg-white text-black p-6 rounded-lg shadow-lg">
+            <h3 className="font-bold text-xl mb-2">Free to Use</h3>
+            <p>
+              Access basic features at no cost, with premium options available.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="w-full text-center py-6 bg-[#405dbb] text-white">
+        <p>&copy; {new Date().getFullYear()} LinkFolio. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 }

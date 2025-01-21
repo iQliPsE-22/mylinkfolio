@@ -24,7 +24,7 @@ import {
 const page = () => {
   const [submit_btn, setSubmit_btn] = useState(false);
   return (
-    <div className="min-h-dvh flex flex-col lg:items-center justify-center p-4 lg:p-8">
+    <div className="min-h-dvh flex flex-col lg:items-center justify-center lg:p-8">
       <StepsRoot defaultStep={0} count={6} className="w-full lg:w-[60%]">
         <StepsList className = "hidden lg:flex flex-row">
           <StepsItem index={0} title="Personal info" />
