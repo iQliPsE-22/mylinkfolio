@@ -14,7 +14,8 @@ import { Button } from "./../components/ui/button";
 import { useRouter } from "next/navigation";
 import Custom from "./../components/Custom";
 import { useUser } from "./userContext.jsx";
-import { SkeletonText } from "@/components/ui/skeleton";
+import Loading from './../components/Loading';
+import Features from './../components/Features';
 
 const floatingStyles = defineStyle({
   pos: "absolute",
@@ -43,6 +44,7 @@ export default function Home() {
   const [linkedinData, setLinkedinData] = useState(null);
   const [userUrl, setUserUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fakeLoading,setFakeLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleFetchUserData = async () => {
@@ -153,9 +155,7 @@ export default function Home() {
       <main className="min-h-dvh flex flex-col lg:flex-row items-start justify-center w-full pb-8 px-6 gap-10">
         {/* Fetch Section */}
         {loading ? (
-          <div className="bg-white p-6 lg:p-14 w-full lg:w-1/2 rounded-lg shadow-lg mt-8">
-            <SkeletonText noOfLines={5} gap="4" className="bg-gray-200" />
-          </div>
+          <Loading/>
         ) : (
           <div className="bg-white p-6 lg:p-16 w-full lg:w-1/2 rounded-lg shadow-lg mt-8 text-black">
             <section className="w-full flex flex-col items-center justify-center pb-8">
@@ -192,46 +192,22 @@ export default function Home() {
                 </button>
               </form>
             </section>
-            <h1 className = "quicksand text-2xl lg:text-4xl font-bold text-[#474747] text-center pt-3 p- pb-5">
+            <h1 className="quicksand text-2xl lg:text-4xl font-bold text-[#474747] text-center pt-3 p- pb-5">
               Link. Generate. Shine
             </h1>
           </div>
         )}
 
         {/* Custom Section */}
-        <Custom />
+        {fakeLoading ? (
+          <Loading/>
+        ) : (
+          <Custom setFakeLoading = {setFakeLoading}/>
+        )}
       </main>
 
       {/* Features Section */}
-      <section className="w-full text-center py-10 px-6 bg-[#ffffff11]">
-        <h2 className="text-2xl lg:text-3xl font-bold mb-6">Why Choose Us?</h2>
-        <div className="flex flex-col lg:flex-row gap-6 max-w-6xl mx-auto">
-          <div className="flex-1 bg-white text-black p-6 rounded-lg shadow-lg">
-            <h3 className="font-bold text-xl mb-2">Effortless Conversion</h3>
-            <p>
-              Turn your LinkedIn profile into a polished resume with minimal
-              effort.
-            </p>
-          </div>
-          <div className="flex-1 bg-white text-black p-6 rounded-lg shadow-lg">
-            <h3 className="font-bold text-xl mb-2">Modern Design</h3>
-            <p>
-              Choose from multiple templates that suit your professional needs.
-            </p>
-          </div>
-          <div className="flex-1 bg-white text-black p-6 rounded-lg shadow-lg">
-            <h3 className="font-bold text-xl mb-2">Free to Use</h3>
-            <p>
-              Access basic features at no cost, with premium options available.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="w-full text-center py-6 bg-[#405dbb] text-white">
-        <p>&copy; {new Date().getFullYear()} LinkFolio. All Rights Reserved.</p>
-      </footer>
+      <Features/>
     </div>
   );
 }

@@ -13,6 +13,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div className="bg-black w-full text-white flex flex-col lg:flex-row justify-around items-center border-t-2 b-t-[#fff] p-5 pb-20 lg:pb-8 lg:p-8 space-y-4 lg:space-y-8 lg:space-y-0">
+
       <div className="w-full lg:w-1/4 flex items-center flex-col">
         <Headline heading={"Resume Lab"} text={"Your ATS Friendly Resume"} />
       </div>
