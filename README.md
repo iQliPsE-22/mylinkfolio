@@ -5,7 +5,7 @@
   </p>
 
   <div align="center">
-    ![image](https://github.com/user-attachments/assets/371c1568-2378-4d5b-9734-4a4fd4bb62c3)
+    <img src >(https://github.com/user-attachments/assets/371c1568-2378-4d5b-9734-4a4fd4bb62c3)
   </div>
 
   <h2>✨ Features</h2>
