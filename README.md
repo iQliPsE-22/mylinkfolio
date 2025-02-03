@@ -70,7 +70,7 @@ Visit <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> 
 <h2>📧 Contact</h2>
 <p>For inquiries, reach out to <strong>Deepak Kumar (iQlipse)</strong>:</p>
 <ul>
-  <li><strong>Email:</strong> your-email@example.com</li>
-  <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/your-profile" target="_blank">linkedin.com/in/your-profile</a></li>
-  <li><strong>Portfolio:</strong> <a href="https://www.iqlipse.studio" target="_blank">iqlipse.studio</a></li>
+  <li><strong>Email:</strong> deepaklg02@gmail.com</li>
+  <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/deepak2004" target="_blank">linkedin.com/in/your-profile</a></li>
+  <li><strong>Portfolio:</strong> <a href="https://www.iqlipse.vercel.app" target="_blank">Portfolio</a></li>
 </ul>
